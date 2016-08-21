@@ -10,19 +10,9 @@ function print_header {
 	echo "|  __/ '__/ _ \ \/ / | | | | ___ \ '__/ _ \| |/ / _ \ '__|"
 	echo "| |  | | | (_) >  <| |_| | | |_/ / | | (_) |   <  __/ |   "
 	echo "\_|  |_|  \___/_/\_\\__, | \____/|_|  \___/|_|\_\___|_|   "
-	echo "                     __/ |                                "
-	echo "                    |___/                                 "
-	echo " _   _           _       _            "                            
-	echo "| | | |         | |     | |           "                  
-	echo "| | | |_ __   __| | __ _| |_ ___ _ __ "             
-	echo "| | | | '_ \ / _` |/ _` | __/ _ \ '__|"
-	echo "| |_| | |_) | (_| | (_| | ||  __/ |   "
-	echo " \___/| .__/ \__,_|\__,_|\__\___|_|   "
-        echo "      | |                             "
-	echo "      |_|                             "
 }
 
-function pbu0 {
+function pbi0 {
 	[[ ! -d ${UPDATE_DIR} ]] && mkdir -p ${UPDATE_DIR}
 	print_header
 	echo "+--------------------------------------------------------+"
@@ -32,17 +22,17 @@ function pbu0 {
 	echo "+--------------------------------------------------------+"
 	echo "| Re-Run this script to continue w/ your update!         |"
 	echo "+--------------------------------------------------------+"
-	echo "pbu1" > ${UPDATE_DIR}/.next_phase
+	echo "pbi1" > ${UPDATE_DIR}/.ni
 	exit 0
 }
 
-function pbu1 {
+function pbi1 {
 	print_header
 	echo "+--------------------------------------------------------+"
 	echo "| [!] Beginning Proxy Broker installation!               |"
 	echo "| [I] Updating apt package list...                       |"
 	sudo apt-get update |tee ${UPDATE_LOG}
-	echo "|                                                        |"
+	echo "+--------------------------------------------------------+"
 	echo "| [I] Updating installed packages to latest verstion...  |"
 	sudo apt-get upgrade -y |tee -a ${UPDATE_LOG}
 	echo "| [!] Installing Proxy Broker Dependencies!              |"
@@ -52,7 +42,7 @@ function pbu1 {
 	sudo apt-get -y install python-pip python-m2crypto python-qt4 pyro-gui python-netfilter python-pyasn1 |tee -a ${UPDATE_LOG}
 	sudo apt-get -y install python-paramiko python-twisted-web python-qt4-sql libqt4-sql-sqlite sqlite3 |tee -a ${UPDATE_LOG}
 	sudo easy_install pynetfilter_conntrack
-	echo "|                                                        |"
+	echo "+--------------------------------------------------------+"
 	echo "| Enter the directory you Proxy Broker installed on...   |"
 	read -p "(default: ${HOME}/broker)" pbdir
 	if [ "$pbdir" == ""]; then
@@ -62,12 +52,76 @@ function pbu1 {
 	echo "| [!]Retrieving current Proxy Broker source from GitHub! |"
 	/usr/bin/hg clone https://github.com/TACTCyberSolns/Proxy-Broker ${pbdir}/current
 	echo "+--------------------------------------------------------+"
-	echo "pbu2" > ${UPDATE_DIR}/.next_phase
+	echo "pbi2" > ${UPDATE_DIR}/.ni
 	pbu2
 }
 
-function pbu2 {
+function pbi2 {
 	print_header
 	echo "+--------------------------------------------------------+"
 	echo "| [!] Proxy Broker installation completed successfully!  |"
+	echo "+--------------------------------------------------------+"
+	echo "| [I] Usage:                                             |"
+	echo "|       ${pbdir}/current/src                             |"
+	echo "|       sudo pyhton ./proxy-broker.py                    |"
+	echo "+--------------------------------------------------------+"
+	read -n1 -p "| Press any key to continue...                           |"
+	echo "pbu" > ${UPDATE_DIR}/.ni
+	exit 0
 }
+
+function pbu {
+	print_header
+	echo "+--------------------------------------------------------+"
+	echo "| [!] Starting update process                            |"
+	if [ ! -d ${UPDATE_DIR} ]; then
+		ehco "| [!] Update directory not found! Terminating update... |"
+		exit 1
+	fi
+	if [ ! -f ${UPDATE_DIR}/installdir ]; then
+		ehco "| [!] Installation directory not fount, Terminating...  |"
+		exit 1
+	fi
+	export pbdir= cat ${UPDATE_DIR}/installdir
+	if [ ! -d ${pbdir} ]; then
+		echo "| [!] Installation directory does not exist, Haulting!  |"
+		exit 1
+	fi
+	echo "| [!] Moving current install to archive!                 |"
+	if [[ -d ${pbdir}/archive ]]; then
+		rm -rf ${pbdir}/archive/*
+	else
+		mkdir ${pbdir}/archive
+	fi
+	if [[ -d ${pbdir}/current ]]; then
+		cp -R {$pbdir}/current/* ${pbdir}/archive/
+	fi
+	rm -rf ${pbdir}/current
+	echo "| [!] Reterieving current Proxy Broker source from GitHub! |"
+	/usr/bin/hg clone http://github.com/TACTCyberSolns/Proxy-Broker ${pbdir}/current
+	echo "pbu" > ${UPDATE_DIR}/.ni
+	exit 0
+}
+
+if [[ -f ${UPDATE_DIR]/.ni ]]; then
+	case `cat ${UPDATE_DIR/.ni}` in
+		pbi0)
+			pbi0
+		;;
+		pbi1)
+			pbi1
+		;;
+		pbi2)
+			pbi2
+		;;
+		pbu)
+			update
+		;;
+		*)
+			echo "| [!] Unknown update status, attempting...                 |"
+			pbu
+		;;
+	esac
+else
+	pbi0
+fi
