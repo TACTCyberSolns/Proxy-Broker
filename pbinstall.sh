@@ -39,8 +39,16 @@ function pbi1 {
 	if [ ! -f /usr/lib/netfilter_conntrack.so.1 ]; then
 		sudo ln -s /usr/lib/libnetfilter_conntrack.so /usr/lib/libnetfilter_conntrack.so.1
 	fi
-	sudo apt-get -y install python-pip python-m2crypto python-qt4 pyro-gui python-netfilter python-pyasn1 |tee -a ${UPDATE_LOG}
-	sudo apt-get -y install python-paramiko python-twisted-web python-qt4-sql libqt4-sql-sqlite sqlite3 |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-pip
+	sudo apt-get -y install python-m2crypto |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-qt4 |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install pyro-gui |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-netfilter |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-pyasn1 |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-paramiko  |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-twisted-web  |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install python-qt4-sql  |tee -a ${UPDATE_LOG}
+	sudo apt-get -y install libqt4-sql-sqlite sqlite3 |tee -a ${UPDATE_LOG}
 	sudo easy_install pynetfilter_conntrack
 	echo "+--------------------------------------------------------+"
 	echo "| Enter the directory you Proxy Broker installed on...   |"
