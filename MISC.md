@@ -1,4 +1,4 @@
-# Requirements
+#Requirements
 
 ## Hardware:
 
@@ -14,7 +14,7 @@ NOTE: These are some recommended Operating Systems to us Proxy Broker with
 - Backbox
 - ParrotOS
 
-# Folders
+#Folders
 
 - ca
 
@@ -35,7 +35,7 @@ NOTE: These are some recommended Operating Systems to us Proxy Broker with
 
     Scripts used to configure the Proxy Broker enviroment
 
-# Usage (PPTP Shown Only)
+#Usage (PPTP Shown Only)
 - Connect your victim to the PPTP server
 - SetUp the interface so that PPP0 is being middled & eth0 is the outbound
 - UnComment or add any protocols/ports you'd like & apply them
