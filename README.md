@@ -30,5 +30,5 @@ tact@cybersolns:~$ sudo python ./pbservice.py
 ```
 
 # Contributors
-Sean Hill (@AzzusssUBT)
-Craig Kupinsky (@craigkupinsky)
+Sean Hill [@AzzusssUBT](http://twitter.com/AzzusssUBT)
+Craig Kupinsky [@craigkupinsky](http://twitter.com/craigkupinsky)
