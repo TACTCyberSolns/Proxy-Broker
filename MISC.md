@@ -25,9 +25,6 @@ NOTE: These are some recommended Operating Systems to us Proxy Broker with
 - db
 
     Where all database files are stored
-- broker
-
-    Empty directory
 - src
 
     Where Proxy Broker operates from
