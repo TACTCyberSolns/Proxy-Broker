@@ -17,16 +17,22 @@ NOTE: These are some recommended Operating Systems to us Proxy Broker with
 # Folders
 
 - ca
+
 Certificate authority files
 - certs
+
 MiTM certificates that are created 'on-the-go'
 - db
+
 Where all database files are stored
 - broker
+
 Empty directory
 - src
+
 Where Proxy Broker operates from
 - scripts
+
 Scripts used to configure the Proxy Broker enviroment
 
 # Usage (PPTP Shown Only)
