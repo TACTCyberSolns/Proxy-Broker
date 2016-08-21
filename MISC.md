@@ -18,22 +18,22 @@ NOTE: These are some recommended Operating Systems to us Proxy Broker with
 
 - ca
 
-Certificate authority files
+    Certificate authority files
 - certs
 
-MiTM certificates that are created 'on-the-go'
+    MiTM certificates that are created 'on-the-go'
 - db
 
-Where all database files are stored
+    Where all database files are stored
 - broker
 
-Empty directory
+    Empty directory
 - src
 
-Where Proxy Broker operates from
+    Where Proxy Broker operates from
 - scripts
 
-Scripts used to configure the Proxy Broker enviroment
+    Scripts used to configure the Proxy Broker enviroment
 
 # Usage (PPTP Shown Only)
 - Connect your victim to the PPTP server
