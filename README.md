@@ -18,12 +18,16 @@ libnetfilter-conntrack-dev
 libnetfilter-conntrack3
 
 # Installation
+'''
 tact@cybersolns:~$ cd proxy-broker
 tact@cybersolns:~$ sudo ./pbinstall.sh
+'''
 
 # Starting Proxy Broker Services
+'''
 tact@cybersolns:~$ cd src
 tact@cybersolns:~$ sudo python ./pbservice.py
+'''
 
 # Contributors
 Sean Hill (@AzzusssUBT)
