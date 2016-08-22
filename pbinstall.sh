@@ -39,7 +39,7 @@ function pbi1 {
 	if [ ! -f /usr/lib/netfilter_conntrack.so.1 ]; then
 		sudo ln -s /usr/lib/libnetfilter_conntrack.so /usr/lib/libnetfilter_conntrack.so.1
 	fi
-	sudo apt-get -y install python-pip
+	sudo apt-get -y install python-pip | tee -a ${UPDATE_LOG}
 	sudo apt-get -y install python-m2crypto |tee -a ${UPDATE_LOG}
 	sudo apt-get -y install python-qt4 |tee -a ${UPDATE_LOG}
 	sudo apt-get -y install pyro-gui |tee -a ${UPDATE_LOG}
